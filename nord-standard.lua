@@ -1,4 +1,24 @@
 function()
+
+
+    -- function hotsForName(name)
+    --   if SAMMERS_NORD_TEST == nil then
+    --     SAMMERS_NORD_TEST = {}
+    --     end 
+    --     if SAMMERS_NORD_TEST[name] == nil then
+    --         SAMMERS_NORD_TEST[name]= {}
+    --     end
+    --     return SAMMERS_NORD_TEST[name]
+    -- end
+
+    -- local cname = aura_env.state.unitName
+    -- local triggernum = aura_env.state.triggernum
+    -- hotsForName(cname)[]
+    -- DevTool:AddData(cname, "cname")
+    -- DevTool:AddData(triggernum, "triggernum")
+    -- DevTool:AddData(aura_env, "aura_env")
+
+    -- print(SAMMERS_NORD_TEST) 
     -- 1. Rejuve
     -- 2. Renewing bloom
     -- 3. Procced Canward
@@ -13,6 +33,8 @@ function()
     -- 12. Frenzy Regen
     -- 13. Cultivation
     -- 14. Treant Wild Growth
+    -- 15. Grove trending
+
     
     function numToStr(num)
         local letter = {
@@ -34,6 +56,7 @@ function()
     function simplehotValue(trigger)
         local finalVal = 0.0
         local multiplier = 1 
+
         if aura_env.states[trigger].show and aura_env.states[trigger].tooltip1 ~= nil and aura_env.states[trigger].tooltip2 ~= nil  then
             finalVal = aura_env.states[trigger].tooltip1 / aura_env.states[trigger].tooltip2
             multiplier = aura_env.states[trigger].matchCount
@@ -81,7 +104,6 @@ function()
         return finalVal
     end
     
-    
     local rejuve = simplehotValue(1)
     local renewingBloom = simplehotValue(2)
     local proccedCanward = simplehotValue(3)
@@ -98,7 +120,8 @@ function()
     local frenzyMultiplier = frenzyMultiplierF(12)
     local cultivation = simplehotValue(13)
     local treantWildGrowth = simplehotValue(14)
-    local res = (rejuve + renewingBloom + proccedCanward +  lifebloom + adaptiveSwarm +  wildGrowth + regrowth + germination + frenzyRegen + tranq + cultivation + treantWildGrowth) * swarmMultiplier * bark * frenzyMultiplier
+    local groveTrending = simplehotValue(15)
+    local res = (rejuve + renewingBloom + proccedCanward +  lifebloom + adaptiveSwarm +  wildGrowth + regrowth + germination + frenzyRegen + tranq + cultivation + groveTrending + treantWildGrowth) * swarmMultiplier * bark * frenzyMultiplier
     local rint = math.floor(res)
     local str = numToStr(rint)
     return str
